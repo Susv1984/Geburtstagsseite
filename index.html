@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Birthday Escape PRO 🎉</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+display:flex;
+justify-content:center;
+padding:10px;
+}
+
+.game{width:100%;max-width:600px;}
+
+.card{
+background:white;
+padding:14px;
+margin:10px 0;
+border-radius:14px;
+box-shadow:0 6px 16px rgba(0,0,0,0.12);
+}
+
+h1,h2{text-align:center;font-size:1.2em;}
+
+input{
+width:100%;
+padding:12px;
+font-size:16px;
+margin-top:6px;
+border-radius:10px;
+border:1px solid #ccc;
+box-sizing:border-box;
+text-transform:lowercase;
+}
+
+button{
+width:100%;
+padding:12px;
+margin-top:8px;
+border:none;
+border-radius:10px;
+background:#ff4d6d;
+color:white;
+font-size:16px;
+font-weight:bold;
+}
+
+.hidden{display:none;}
+
+.good{color:green;text-align:center;font-weight:bold;}
+.bad{color:red;text-align:center;font-weight:bold;}
+
+#trollBtn{position:relative;transition:0.1s;}
+
+.final{
+text-align:center;
+font-size:22px;
+color:#ff0066;
+font-weight:bold;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="game">
+
+<h1>🎉 Birthday Escape 🎉</h1>
+
+<!-- START -->
+<div class="card" id="startCard">
+
+<p>Wer ist die beste Datenschutzbeauftragte der Welt?</p>
+
+<input id="start">
+<button onclick="startGame()">Start</button>
+
+<div id="startRes"></div>
+
+</div>
+
+<div id="game" class="hidden">
+
+<!-- R1 -->
+<div class="card" id="r1card">
+<h2>🧩 Rätsel 1</h2>
+<p>Ich habe Städte ohne Häuser…</p>
+
+<input id="r1">
+<button onclick="r1()">OK</button>
+
+<div id="r1r"></div>
+</div>
+
+<!-- R2 -->
+<div class="card">
+<h2>🧩 Rätsel 2</h2>
+<p>Ich gehe den ganzen Tag, bleibe aber stehen.</p>
+
+<input id="r2">
+<button onclick="r2()">OK</button>
+
+<div id="r2r"></div>
+
+<div id="troll" class="hidden">
+<button id="trollBtn">😈 Klick mich</button>
+<div id="trollr"></div>
+</div>
+
+</div>
+
+<!-- MATH -->
+<div class="card">
+<h2>➗ Mathe</h2>
+<p>(18 × 3) − (24 ÷ 6)</p>
+
+<input id="r3">
+<button onclick="r3()">OK</button>
+<div id="r3r"></div>
+</div>
+
+<div class="card">
+<h2>➗ Mathe 2</h2>
+<p>√144 + 7² − 5</p>
+
+<input id="r4">
+<button onclick="r4()">OK</button>
+<div id="r4r"></div>
+</div>
+
+<!-- FINAL -->
+<div class="card">
+<h2>🔐 Finale</h2>
+
+<input id="a" maxlength="1">
+<input id="b" maxlength="1">
+<input id="c" maxlength="1">
+
+<button onclick="final()">Öffnen 🎉</button>
+
+<div id="fr"></div>
+
+</div>
+
+</div>
+
+<!-- END -->
+<div class="card hidden" id="end">
+
+<div class="final">
+🎉 HAPPY BIRTHDAY MELISSA 🎉<br><br>
+Jetzt kannst du dein Geschenk öffnen 🎁<br>
+🔢 Code: 294
+</div>
+
+</div>
+
+<script>
+
+/* TRACKING */
+let solved = {
+r1:false,
+r2:false,
+r3:false,
+r4:false,
+troll:false
+};
+
+/* START */
+function startGame(){
+
+let v=document.getElementById("start").value.toLowerCase().trim();
+
+if(v==="ich"){
+document.getElementById("startCard").classList.add("hidden");
+document.getElementById("game").classList.remove("hidden");
+}else{
+document.getElementById("startRes").innerHTML="❌ Tipp: ich";
+}
+
+}
+
+/* R1 */
+function r1(){
+
+let v=document.getElementById("r1").value.toLowerCase().trim();
+
+if(v.includes("karte")){
+document.getElementById("r1r").innerHTML="<div class='good'>✔ richtig</div>";
+solved.r1=true;
+}else{
+document.getElementById("r1r").innerHTML="<div class='bad'>❌ falsch</div>";
+}
+
+}
+
+/* R2 */
+let moves=0;
+
+function r2(){
+
+let v=document.getElementById("r2").value.toLowerCase().trim();
+
+if(v.includes("uhr")){
+document.getElementById("r2r").innerHTML="<div class='good'>✔ richtig</div>";
+document.getElementById("troll").classList.remove("hidden");
+initTroll();
+solved.r2=true;
+}else{
+document.getElementById("r2r").innerHTML="<div class='bad'>❌ falsch</div>";
+}
+
+}
+
+/* TROLL FIX */
+function initTroll(){
+
+let b=document.getElementById("trollBtn");
+
+b.onclick=function(){
+
+moves++;
+
+if(moves<12){
+
+b.style.transform=
+`translate(${Math.random()*200-100}px,${Math.random()*100-50}px)`;
+
+}else{
+
+document.getElementById("trollr").innerHTML=
+"<div class='good'>✔ geschafft</div>";
+
+solved.troll=true;
+b.innerText="fertig 😂";
+b.disabled=true;
+b.style.transform="none";
+
+}
+
+};
+
+}
+
+/* MATH */
+function r3(){
+let v=document.getElementById("r3").value;
+if(v==50){
+document.getElementById("r3r").innerHTML="<div class='good'>✔ richtig</div>";
+solved.r3=true;
+}else{
+document.getElementById("r3r").innerHTML="<div class='bad'>❌ falsch</div>";
+}
+}
+
+function r4(){
+let v=document.getElementById("r4").value;
+if(v==56){
+document.getElementById("r4r").innerHTML="<div class='good'>✔ richtig</div>";
+solved.r4=true;
+}else{
+document.getElementById("r4r").innerHTML="<div class='bad'>❌ falsch</div>";
+}
+}
+
+/* FINAL */
+function final(){
+
+if(!solved.r1||!solved.r2||!solved.r3||!solved.r4||!solved.troll){
+document.getElementById("fr").innerHTML=
+"<div class='bad'>❌ erst alle Rätsel lösen</div>";
+return;
+}
+
+let a=document.getElementById("a").value;
+let b=document.getElementById("b").value;
+let c=document.getElementById("c").value;
+
+if(a=="4"&&b=="7"&&c=="2"){
+
+document.getElementById("game").classList.add("hidden");
+document.getElementById("end").classList.remove("hidden");
+
+}else{
+document.getElementById("fr").innerHTML=
+"<div class='bad'>❌ falsch</div>";
+}
+
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Melissa 🎉</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:linear-gradient(135deg,#ffb6c1,#ffd700);
+    min-height:100vh;
+    color:#222;
+    overflow-x:hidden;
+}
+
+.page{
+    display:none;
+    padding:30px;
+    max-width:900px;
+    margin:auto;
+    text-align:center;
+}
+
+.active{
+    display:block;
+}
+
+.card{
+    background:white;
+    padding:30px;
+    border-radius:25px;
+    margin:25px 0;
+    box-shadow:0 10px 25px rgba(0,0,0,0.15);
+}
+
+h1{
+    font-size:3em;
+}
+
+h2{
+    margin-top:0;
+}
+
+button{
+    padding:12px 24px;
+    border:none;
+    border-radius:12px;
+    background:#ff4d6d;
+    color:white;
+    font-size:1em;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+button:hover{
+    transform:scale(1.05);
+}
+
+input{
+    padding:10px;
+    border-radius:10px;
+    border:2px solid #ccc;
+    font-size:1em;
+    text-align:center;
+    width:180px;
+}
+
+.hidden{
+    display:none;
+}
+
+.success{
+    color:green;
+    font-weight:bold;
+    margin-top:10px;
+}
+
+.error{
+    color:red;
+    font-weight:bold;
+    margin-top:10px;
+}
+
+.final{
+    font-size:1.8em;
+    color:#ff0066;
+    animation:pulse 1s infinite;
+}
+
+#movingButton{
+    position:relative;
+}
+
+@keyframes pulse{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.05);}
+    100%{transform:scale(1);}
+}
+
+.confetti{
+    font-size:2em;
+    animation:float 3s infinite ease-in-out;
+}
+
+@keyframes float{
+    0%{transform:translateY(0);}
+    50%{transform:translateY(-10px);}
+    100%{transform:translateY(0);}
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- STARTSEITE -->
+<div class="page active" id="page1">
+
+    <div class="card">
+
+        <div class="confetti">🎉 🎂 🥳 🎁</div>
+
+        <h1>Happy Birthday Melissa ❤️</h1>
+
+        <p style="font-size:1.3em;">
+            Heute wartet ein kleines Geburtstags-Abenteuer auf dich 😄
+        </p>
+
+        <p>
+            Löse alle Rätsel und knacke den geheimen Code!
+        </p>
+
+        <br>
+
+        <button onclick="nextPage(2)">
+            Abenteuer starten 🚀
+        </button>
+
+    </div>
+
+</div>
+
+<!-- WARM-UP -->
+<div class="page" id="page2">
+
+    <div class="card">
+
+        <h2>🔥 Warm-Up Rätsel</h2>
+
+        <p style="font-size:1.2em;">
+            Wer ist die beste Datenschutzbeauftragte der Welt? 😎
+        </p>
+
+        <input type="text" id="warmupAnswer" placeholder="Deine Antwort">
+
+        <br><br>
+
+        <button onclick="checkWarmup()">Prüfen</button>
+
+        <div id="warmupResult"></div>
+
+    </div>
+
+</div>
+
+<!-- HAUPTRÄTSEL -->
+<div class="page" id="page3">
+
+    <h1>🎯 Die Hauptmission</h1>
+
+    <!-- Rätsel 1 -->
+    <div class="card">
+
+        <h2>🧩 Rätsel 1</h2>
+
+        <p>
+            Ich habe Städte, aber keine Häuser.<br>
+            Ich habe Wälder, aber keine Bäume.<br>
+            Ich habe Wasser, aber keine Fische.<br><br>
+
+            Was bin ich?
+        </p>
+
+        <input type="text" id="answer1" placeholder="Antwort">
+
+        <br><br>
+
+        <button onclick="checkRiddle1()">Prüfen</button>
+
+        <div id="result1"></div>
+
+        <div id="number1" class="hidden">
+            🎯 Deine erste Zahl ist: <b>4</b>
+        </div>
+
+    </div>
+
+    <!-- Rätsel 2 -->
+    <div class="card">
+
+        <h2>😂 Rätsel 2</h2>
+
+        <p>
+            Was rennt den ganzen Tag herum,<br>
+            bleibt aber immer zuhause?
+        </p>
+
+        <input type="text" id="answer2" placeholder="Antwort">
+
+        <br><br>
+
+        <button onclick="checkRiddle2()">Prüfen</button>
+
+        <div id="result2"></div>
+
+        <div id="movingSection" class="hidden">
+
+            <p style="margin-top:25px;">
+                Okay 😄 Jetzt fang den Button!
+            </p>
+
+            <button id="movingButton">
+                Klick mich 😈
+            </button>
+
+        </div>
+
+        <div id="number2" class="hidden" style="margin-top:20px;">
+            🎯 Deine zweite Zahl ist: <b>7</b>
+        </div>
+
+    </div>
+
+    <!-- Rätsel 3 -->
+    <div class="card">
+
+        <h2>🕵️ Rätsel 3</h2>
+
+        <p>
+            Was wird feuchter, je mehr es trocknet?
+        </p>
+
+        <input type="text" id="answer3" placeholder="Antwort">
+
+        <br><br>
+
+        <button onclick="checkRiddle3()">Prüfen</button>
+
+        <div id="result3"></div>
+
+        <div id="number3" class="hidden">
+            🎯 Deine dritte Zahl ist: <b>2</b>
+        </div>
+
+    </div>
+
+    <!-- FINALE -->
+    <div class="card">
+
+        <h2>🔐 Finale Kombination</h2>
+
+        <p>Gib die 3 geheimen Zahlen ein:</p>
+
+        <input type="text" id="final1" maxlength="1">
+        <input type="text" id="final2" maxlength="1">
+        <input type="text" id="final3" maxlength="1">
+
+        <br><br>
+
+        <button onclick="checkFinal()">Code prüfen</button>
+
+        <div id="finalResult"></div>
+
+    </div>
+
+</div>
+
+<!-- FINALE SEITE -->
+<div class="page" id="page4">
+
+    <div class="card">
+
+        <div class="confetti">
+            🎉 🎂 🥳 🎁 ❤️
+        </div>
+
+        <h1>Happy Birthday Melissa ❤️</h1>
+
+        <p style="font-size:1.5em; margin-top:30px;">
+
+            Jetzt hast du alle 3 Nummern gefunden 🔐
+
+        </p>
+
+        <p style="font-size:1.3em;">
+
+            Damit kannst du endlich dein Schloss öffnen 😄
+
+        </p>
+
+        <br>
+
+        <div class="final">
+
+            🎉 Überraschung freigeschaltet 🎉
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+function nextPage(page){
+
+    document.querySelectorAll(".page").forEach(p=>{
+        p.classList.remove("active");
+    });
+
+    document.getElementById("page"+page)
+        .classList.add("active");
+}
+
+// WARMUP
+function checkWarmup(){
+
+    let answer =
+        document.getElementById("warmupAnswer")
+        .value
+        .toLowerCase()
+        .trim();
+
+    if(answer.includes("melissa")){
+
+        document.getElementById("warmupResult")
+            .innerHTML =
+            "<div class='success'>Natürlich 😄🎉</div>";
+
+        setTimeout(()=>{
+            nextPage(3);
+        },1500);
+
+    }else{
+
+        document.getElementById("warmupResult")
+            .innerHTML =
+            "<div class='error'>Falsch 😄 Versuch's nochmal!</div>";
+    }
+}
+
+// RÄTSEL 1
+function checkRiddle1(){
+
+    let answer =
+        document.getElementById("answer1")
+        .value
+        .toLowerCase()
+        .trim();
+
+    if(answer.includes("karte")){
+
+        document.getElementById("result1")
+            .innerHTML =
+            "<div class='success'>Richtig 🎉</div>";
+
+        document.getElementById("number1")
+            .classList.remove("hidden");
+
+    }else{
+
+        document.getElementById("result1")
+            .innerHTML =
+            "<div class='error'>Leider falsch 😅</div>";
+    }
+}
+
+// RÄTSEL 2
+function checkRiddle2(){
+
+    let answer =
+        document.getElementById("answer2")
+        .value
+        .toLowerCase()
+        .trim();
+
+    if(
+        answer.includes("uhr") ||
+        answer.includes("die uhr")
+    ){
+
+        document.getElementById("result2")
+            .innerHTML =
+            "<div class='success'>Richtig 😄</div>";
+
+        document.getElementById("movingSection")
+            .classList.remove("hidden");
+
+    }else{
+
+        document.getElementById("result2")
+            .innerHTML =
+            "<div class='error'>Nope 😄</div>";
+    }
+}
+
+// BEWEGENDER BUTTON
+let moveCount = 0;
+
+const movingButton =
+    document.getElementById("movingButton");
+
+movingButton.addEventListener("mouseover", moveButton);
+movingButton.addEventListener("click", moveButton);
+
+function moveButton(){
+
+    if(moveCount < 7){
+
+        const x = Math.random() * 400 - 200;
+        const y = Math.random() * 200 - 100;
+
+        movingButton.style.transform =
+            `translate(${x}px, ${y}px)`;
+
+        moveCount++;
+
+    }else{
+
+        movingButton.innerHTML =
+            "Okay okay 😂";
+
+        document.getElementById("number2")
+            .classList.remove("hidden");
+
+        movingButton.disabled = true;
+    }
+}
+
+// RÄTSEL 3
+function checkRiddle3(){
+
+    let answer =
+        document.getElementById("answer3")
+        .value
+        .toLowerCase()
+        .trim();
+
+    if(answer.includes("handtuch")){
+
+        document.getElementById("result3")
+            .innerHTML =
+            "<div class='success'>Richtig 🎉</div>";
+
+        document.getElementById("number3")
+            .classList.remove("hidden");
+
+    }else{
+
+        document.getElementById("result3")
+            .innerHTML =
+            "<div class='error'>Leider falsch 😄</div>";
+    }
+}
+
+// FINALE
+function checkFinal(){
+
+    let a = document.getElementById("final1").value;
+    let b = document.getElementById("final2").value;
+    let c = document.getElementById("final3").value;
+
+    if(a==="4" && b==="7" && c==="2"){
+
+        nextPage(4);
+
+    }else{
+
+        document.getElementById("finalResult")
+            .innerHTML =
+            "<div class='error'>" +
+            "Der Code stimmt nicht 😬" +
+            "</div>";
+    }
+}
+
+</script>
+
+</body>
+</html>

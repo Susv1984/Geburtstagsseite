@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -108,8 +109,6 @@ margin-top:8px;
 display:none;
 }
 
-/* PROGRESS */
-
 .progress{
 height:18px;
 background:#eee;
@@ -125,8 +124,6 @@ background:#ff4d6d;
 transition:0.4s;
 }
 
-/* LOCK */
-
 .lock{
 font-size:70px;
 margin:10px 0;
@@ -140,8 +137,6 @@ animation:shake 1s infinite;
 75%{transform:rotate(4deg);}
 100%{transform:rotate(0deg);}
 }
-
-/* TIMER */
 
 #timer{
 font-size:28px;
@@ -159,14 +154,10 @@ animation:pulse 1s infinite;
 100%{transform:scale(1);}
 }
 
-/* TROLL */
-
 #trollBtn{
 position:relative;
 transition:0.08s;
 }
-
-/* CONFETTI */
 
 .confetti{
 position:fixed;
@@ -183,8 +174,6 @@ transform:translateY(120vh) rotate(720deg);
 opacity:0;
 }
 }
-
-/* GIFT */
 
 .gift{
 font-size:90px;
@@ -211,7 +200,6 @@ line-height:1.6em;
 
 <div class="container">
 
-<!-- INTRO -->
 <div class="card" id="intro">
 
 <h1>🎉 Melissa´s Birthday Box 🎉</h1>
@@ -236,10 +224,8 @@ Spiel starten 🎮
 
 </div>
 
-<!-- GAME -->
 <div id="game" class="hidden">
 
-<!-- TIMER -->
 <div class="card">
 
 <div id="timer">
@@ -252,7 +238,6 @@ Spiel starten 🎮
 
 </div>
 
-<!-- R1 -->
 <div class="card">
 
 <h2>🧩 Rätsel 1</h2>
@@ -275,7 +260,6 @@ Prüfen
 
 </div>
 
-<!-- R2 -->
 <div class="card">
 
 <h2>🕒 Rätsel 2</h2>
@@ -305,7 +289,6 @@ Prüfen
 
 </div>
 
-<!-- M1 -->
 <div class="card">
 
 <h2>➗ Mathe 1</h2>
@@ -324,7 +307,6 @@ Prüfen
 
 </div>
 
-<!-- M2 -->
 <div class="card">
 
 <h2>➗ Mathe 2</h2>
@@ -343,7 +325,6 @@ Prüfen
 
 </div>
 
-<!-- EXTRA -->
 <div class="card">
 
 <h2>🧠 Bonus Rätsel</h2>
@@ -365,7 +346,105 @@ Prüfen
 
 </div>
 
-<!-- FINAL -->
+<!-- NEU -->
+
+<div class="card">
+
+<h2>🧩 Rätsel 3</h2>
+
+<p>
+Was wird nass,<br>
+während es trocknet?
+</p>
+
+<input id="r3">
+
+<button onclick="checkR3()">
+Prüfen
+</button>
+
+<div id="r3r"></div>
+
+</div>
+
+<div class="card">
+
+<h2>🧩 Rätsel 4</h2>
+
+<p>
+Je mehr du davon hast,<br>
+desto weniger siehst du.<br><br>
+
+Was ist das?
+</p>
+
+<input id="r4">
+
+<button onclick="checkR4()">
+Prüfen
+</button>
+
+<div id="r4r"></div>
+
+</div>
+
+<div class="card">
+
+<h2>➗ Mathe 3</h2>
+
+<p>
+(12 × 4) + (81 ÷ 9)
+</p>
+
+<input id="m3">
+
+<button onclick="checkM3()">
+Prüfen
+</button>
+
+<div id="m3r"></div>
+
+</div>
+
+<div class="card">
+
+<h2>➗ Mathe 4</h2>
+
+<p>
+√225 + 18 − 7
+</p>
+
+<input id="m4">
+
+<button onclick="checkM4()">
+Prüfen
+</button>
+
+<div id="m4r"></div>
+
+</div>
+
+<div class="card">
+
+<h2>🧠 Rätsel 5</h2>
+
+<p>
+Ich habe einen Hals,<br>
+aber keinen Kopf.<br><br>
+
+Was bin ich?
+</p>
+
+<input id="r5">
+
+<button onclick="checkR5()">
+Prüfen
+</button>
+
+<div id="r5r"></div>
+
+</div>
+
 <div class="card">
 
 <h2>🔐 Finale</h2>
@@ -392,7 +471,6 @@ Schloss öffnen 🎁
 
 </div>
 
-<!-- GAME OVER -->
 <div class="card hidden" id="gameOver">
 
 <h1>💀 GAME OVER 💀</h1>
@@ -407,7 +485,6 @@ Neu starten
 
 </div>
 
-<!-- END -->
 <div class="card hidden" id="endScreen">
 
 <div class="gift" onclick="openGift()">
@@ -434,18 +511,19 @@ Jetzt kannst du dein Geschenk öffnen ❤️<br><br>
 
 <script>
 
-/* STATE */
-
 let solved={
 r1:false,
 r2:false,
 troll:false,
 m1:false,
 m2:false,
-bonus:false
+bonus:false,
+r3:false,
+r4:false,
+m3:false,
+m4:false,
+r5:false
 };
-
-/* SOUND */
 
 function beep(type){
 
@@ -472,8 +550,6 @@ osc.stop(ctx.currentTime+0.15);
 
 }
 
-/* VIBRATION */
-
 function vib(pattern=[150]){
 
 if(navigator.vibrate){
@@ -481,8 +557,6 @@ navigator.vibrate(pattern);
 }
 
 }
-
-/* PROGRESS */
 
 function updateBar(){
 
@@ -494,14 +568,12 @@ if(solved[k]) done++;
 
 }
 
-let percent=(done/6)*100;
+let percent=(done/11)*100;
 
 document.getElementById("bar").style.width=
 percent+"%";
 
 }
-
-/* TIMER */
 
 let total=300;
 
@@ -547,8 +619,6 @@ beep("bad");
 
 }
 
-/* START */
-
 function startGame(){
 
 let v=document.getElementById("startInput")
@@ -580,8 +650,6 @@ beep("bad");
 
 }
 
-/* R1 */
-
 function checkR1(){
 
 let v=document.getElementById("r1")
@@ -612,8 +680,6 @@ beep("bad");
 }
 
 }
-
-/* R2 */
 
 function checkR2(){
 
@@ -650,8 +716,6 @@ beep("bad");
 }
 
 }
-
-/* TROLL */
 
 let trollClicks=0;
 let trollStarted=false;
@@ -704,8 +768,6 @@ beep("good");
 
 }
 
-/* M1 */
-
 function checkM1(){
 
 let v=document.getElementById("m1")
@@ -736,8 +798,6 @@ beep("bad");
 }
 
 }
-
-/* M2 */
 
 function checkM2(){
 
@@ -770,8 +830,6 @@ beep("bad");
 
 }
 
-/* BONUS */
-
 function checkBonus(){
 
 let v=document.getElementById("bonus")
@@ -803,7 +861,160 @@ beep("bad");
 
 }
 
-/* CONFETTI */
+function checkR3(){
+
+let v=document.getElementById("r3")
+.value.toLowerCase().trim();
+
+if(v.includes("handtuch")){
+
+solved.r3=true;
+
+updateBar();
+
+document.getElementById("r3r")
+.innerHTML=
+"<div class='good'>✔ Richtig 😄</div>";
+
+vib();
+
+beep("good");
+
+}else{
+
+document.getElementById("r3r")
+.innerHTML=
+"<div class='bad'>❌ Nope</div>";
+
+beep("bad");
+
+}
+
+}
+
+function checkR4(){
+
+let v=document.getElementById("r4")
+.value.toLowerCase().trim();
+
+if(v.includes("dunkel")){
+
+solved.r4=true;
+
+updateBar();
+
+document.getElementById("r4r")
+.innerHTML=
+"<div class='good'>✔ Sehr gut 😎</div>";
+
+vib();
+
+beep("good");
+
+}else{
+
+document.getElementById("r4r")
+.innerHTML=
+"<div class='bad'>❌ Falsch</div>";
+
+beep("bad");
+
+}
+
+}
+
+function checkM3(){
+
+let v=document.getElementById("m3")
+.value.trim();
+
+if(v==="57"){
+
+solved.m3=true;
+
+updateBar();
+
+document.getElementById("m3r")
+.innerHTML=
+"<div class='good'>✔ Richtig gerechnet 🔥</div>";
+
+vib();
+
+beep("good");
+
+}else{
+
+document.getElementById("m3r")
+.innerHTML=
+"<div class='bad'>❌ Nope</div>";
+
+beep("bad");
+
+}
+
+}
+
+function checkM4(){
+
+let v=document.getElementById("m4")
+.value.trim();
+
+if(v==="26"){
+
+solved.m4=true;
+
+updateBar();
+
+document.getElementById("m4r")
+.innerHTML=
+"<div class='good'>✔ Stark 😄</div>";
+
+vib();
+
+beep("good");
+
+}else{
+
+document.getElementById("m4r")
+.innerHTML=
+"<div class='bad'>❌ Falsch</div>";
+
+beep("bad");
+
+}
+
+}
+
+function checkR5(){
+
+let v=document.getElementById("r5")
+.value.toLowerCase().trim();
+
+if(v.includes("flasche")){
+
+solved.r5=true;
+
+updateBar();
+
+document.getElementById("r5r")
+.innerHTML=
+"<div class='good'>✔ Genau 😄</div>";
+
+vib();
+
+beep("good");
+
+}else{
+
+document.getElementById("r5r")
+.innerHTML=
+"<div class='bad'>❌ Nope</div>";
+
+beep("bad");
+
+}
+
+}
 
 function confetti(){
 
@@ -837,8 +1048,6 @@ setTimeout(()=>d.remove(),5000);
 
 }
 
-/* FINAL */
-
 function finishGame(){
 
 if(
@@ -847,7 +1056,12 @@ if(
 !solved.troll||
 !solved.m1||
 !solved.m2||
-!solved.bonus
+!solved.bonus||
+!solved.r3||
+!solved.r4||
+!solved.m3||
+!solved.m4||
+!solved.r5
 ){
 
 document.getElementById("finalResult")
@@ -900,8 +1114,6 @@ beep("bad");
 
 }
 
-/* GIFT */
-
 function openGift(){
 
 document.getElementById("giftText")
@@ -919,3 +1131,4 @@ beep("win");
 
 </body>
 </html>
+```

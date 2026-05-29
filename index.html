@@ -26,12 +26,7 @@ text-align:center;
 100%{background-position:0% 50%;}
 }
 
-.container{
-width:100%;
-max-width:520px;
-margin:auto;
-padding:12px;
-}
+.container{max-width:520px;margin:auto;padding:12px;}
 
 .card{
 background:white;
@@ -47,7 +42,7 @@ from{opacity:0;transform:translateY(20px);}
 to{opacity:1;transform:translateY(0);}
 }
 
-h1{font-size:2em;margin-bottom:10px;}
+h1{font-size:2em;}
 h2{margin-top:0;}
 
 input{
@@ -75,8 +70,8 @@ cursor:pointer;
 
 button:active{transform:scale(0.98);}
 
-.good{color:green;font-weight:bold;margin-top:8px;}
-.bad{color:red;font-weight:bold;margin-top:8px;}
+.good{color:green;font-weight:bold;}
+.bad{color:red;font-weight:bold;}
 
 .hidden{display:none;}
 
@@ -88,18 +83,9 @@ overflow:hidden;
 margin-top:10px;
 }
 
-.bar{
-height:100%;
-width:0%;
-background:#ff4d6d;
-transition:0.4s;
-}
+.bar{height:100%;width:0%;background:#ff4d6d;transition:0.4s;}
 
-.lock{
-font-size:70px;
-margin:10px 0;
-animation:shake 1s infinite;
-}
+.lock{font-size:70px;animation:shake 1s infinite;}
 
 @keyframes shake{
 0%{transform:rotate(0deg);}
@@ -109,19 +95,9 @@ animation:shake 1s infinite;
 100%{transform:rotate(0deg);}
 }
 
-#timer{font-size:28px;font-weight:bold;}
-.warning{color:red;animation:pulse 1s infinite;}
-
-@keyframes pulse{
-0%{transform:scale(1);}
-50%{transform:scale(1.05);}
-100%{transform:scale(1);}
-}
-
 .confetti{
 position:fixed;
-width:10px;
-height:10px;
+width:10px;height:10px;
 top:-10px;
 z-index:9999;
 animation:fall linear forwards;
@@ -131,11 +107,7 @@ animation:fall linear forwards;
 to{transform:translateY(120vh) rotate(720deg);opacity:0;}
 }
 
-.gift{
-font-size:90px;
-animation:bounce 1s infinite;
-cursor:pointer;
-}
+.gift{font-size:90px;cursor:pointer;animation:bounce 1s infinite;}
 
 @keyframes bounce{
 0%,100%{transform:translateY(0);}
@@ -143,7 +115,7 @@ cursor:pointer;
 }
 
 .finalText{
-font-size:24px;
+font-size:22px;
 font-weight:bold;
 color:#ff0066;
 line-height:1.6em;
@@ -158,22 +130,14 @@ line-height:1.6em;
 
 <!-- INTRO -->
 <div class="card" id="intro">
-
 <h1>🎉 Melissa´s Birthday Quest 🎉</h1>
+<p>Finde alle Lösungen bevor die Zeit abläuft 🎁</p>
 
-<p>
-Hello Sunshine 😄<br><br>
-Löse alle Rätsel bevor die Zeit abläuft…<br>
-Nur dann kannst du dein Geschenk öffnen 🎁
-</p>
+<h2>Wer ist die beste Datenschutzdodo?</h2>
 
-<h2>Wer ist der beste Datenschutzdodo und Qualmity Managerin der Welt?</h2>
-
-<input id="startInput" placeholder="Antwort eingeben...">
-
-<button onclick="startGame()">Spiel starten 🎮</button>
+<input id="startInput">
+<button onclick="startGame()">Start</button>
 <div id="startResult"></div>
-
 </div>
 
 <!-- GAME -->
@@ -184,18 +148,20 @@ Nur dann kannst du dein Geschenk öffnen 🎁
 <div class="progress"><div class="bar" id="bar"></div></div>
 </div>
 
-<!-- RÄTSEL 1 -->
+<!-- R1 -->
 <div class="card">
-<h2>🧩 Rätsel 1</h2>
-<p>Ich habe Städte, aber keine Häuser. Ich habe Wälder, aber keine Bäume. Ich habe Wasser, aber keine Fische. Was bin ich?</p>
-<input id="r1"><button onclick="checkR1()">Prüfen</button><div id="r1r"></div>
+<h2>Rätsel 1</h2>
+<p>Ich habe Städte ohne Häuser...</p>
+<input id="r1">
+<button onclick="checkR1()">Check</button>
+<div id="r1r"></div>
 </div>
 
-<!-- RÄTSEL 2 -->
+<!-- R2 -->
 <div class="card">
-<h2>🕒 Rätsel 2</h2>
-<p>Ich gehe den ganzen Tag, bleibe aber stehen.</p>
-<input id="r2"><button onclick="checkR2()">Prüfen</button>
+<h2>Rätsel 2</h2>
+<input id="r2">
+<button onclick="checkR2()">Check</button>
 <div id="r2r"></div>
 
 <div id="trollArea" class="hidden">
@@ -204,116 +170,119 @@ Nur dann kannst du dein Geschenk öffnen 🎁
 </div>
 </div>
 
-<!-- MATHE -->
+<!-- M1 -->
 <div class="card">
-<h2>➗ Mathe 1</h2>
-<p>(18 × 3) − (24 ÷ 6)</p>
-<input id="m1"><button onclick="checkM1()">Prüfen</button><div id="m1r"></div>
+<h2>Mathe 1</h2>
+<input id="m1">
+<button onclick="checkM1()">Check</button>
+<div id="m1r"></div>
 </div>
 
+<!-- M2 -->
 <div class="card">
-<h2>➗ Mathe 2</h2>
-<p>√144 + 7² − 5</p>
-<input id="m2"><button onclick="checkM2()">Prüfen</button><div id="m2r"></div>
+<h2>Mathe 2</h2>
+<input id="m2">
+<button onclick="checkM2()">Check</button>
+<div id="m2r"></div>
 </div>
 
 <!-- BONUS -->
 <div class="card">
-<h2>🧠 Bonus Rätsel</h2>
-<p>Je mehr du davon nimmst, desto mehr bleibt zurück.</p>
-<input id="bonus"><button onclick="checkBonus()">Prüfen</button><div id="bonusr"></div>
+<h2>Bonus</h2>
+<input id="bonus">
+<button onclick="checkBonus()">Check</button>
+<div id="bonusr"></div>
 </div>
 
 <!-- R3 -->
 <div class="card">
-<h2>🧩 Rätsel 3</h2>
-<p>Was wird nass, während es trocknet?</p>
-<input id="r3"><button onclick="checkR3()">Prüfen</button><div id="r3r"></div>
+<h2>Rätsel 3</h2>
+<input id="r3">
+<button onclick="checkR3()">Check</button>
+<div id="r3r"></div>
 </div>
 
 <!-- R4 -->
 <div class="card">
-<h2>🧩 Rätsel 4</h2>
-<p>Je mehr du davon hast, desto weniger siehst du.</p>
-<input id="r4"><button onclick="checkR4()">Prüfen</button><div id="r4r"></div>
+<h2>Rätsel 4</h2>
+<input id="r4">
+<button onclick="checkR4()">Check</button>
+<div id="r4r"></div>
 </div>
 
-<!-- MATHE 3 -->
+<!-- M3 -->
 <div class="card">
-<h2>➗ Mathe 3</h2>
-<p>(12 × 4) + (81 ÷ 9)</p>
-<input id="m3"><button onclick="checkM3()">Prüfen</button><div id="m3r"></div>
+<h2>Mathe 3</h2>
+<input id="m3">
+<button onclick="checkM3()">Check</button>
+<div id="m3r"></div>
 </div>
 
-<!-- MATHE 4 -->
+<!-- M4 -->
 <div class="card">
-<h2>➗ Mathe 4</h2>
-<p>√225 + 18 − 7</p>
-<input id="m4"><button onclick="checkM4()">Prüfen</button><div id="m4r"></div>
+<h2>Mathe 4</h2>
+<input id="m4">
+<button onclick="checkM4()">Check</button>
+<div id="m4r"></div>
 </div>
 
 <!-- R5 -->
 <div class="card">
-<h2>🧠 Rätsel 5</h2>
-<p>Ich habe einen Hals, aber keinen Kopf.</p>
-<input id="r5"><button onclick="checkR5()">Prüfen</button><div id="r5r"></div>
+<h2>Rätsel 5</h2>
+<input id="r5">
+<button onclick="checkR5()">Check</button>
+<div id="r5r"></div>
 </div>
 
 <!-- FINAL -->
 <div class="card">
-<h2>🔐 Finale</h2>
+<h2>Final</h2>
 
 <div class="lock" id="lock">🔒</div>
-
-<p>Gib die 3 geheimen Zahlen ein:</p>
 
 <input id="f1" maxlength="1">
 <input id="f2" maxlength="1">
 <input id="f3" maxlength="1">
 
-<button onclick="finishGame()">Schloss öffnen 🎁</button>
-
+<button onclick="finishGame()">Öffnen</button>
 <div id="finalResult"></div>
 </div>
 
 </div>
 
 <!-- GAME OVER -->
-<div class="card hidden" id="gameOver">
-<h1>💀 GAME OVER 💀</h1>
-<button onclick="location.reload()">Neu starten</button>
+<div id="gameOver" class="card hidden">
+<h1>GAME OVER</h1>
+<button onclick="location.reload()">Neu</button>
 </div>
 
-<!-- GEDICHT (NEU) -->
-<div class="card hidden" id="poemScreen">
+<!-- POEM -->
+<div id="poemScreen" class="card hidden">
 
 <div class="finalText">
 
 Du bist der leise Morgen in meinem Herz,<br>
-der erste Sonnenstrahl nach langer Nacht.<br>
-Wenn deine Augen meine suchen,<br>
-fühlt sich die Welt plötzlich leicht an<br><br>
+der erste Sonnenstrahl nach langer Nacht.<br><br>
 
-In deiner Nähe verliert die Zeit ihr Gewicht...<br><br>
+In deiner Nähe verliert die Zeit ihr Gewicht,<br>
+und alles wird leicht.<br><br>
 
-Ich liebe dich in jedem Moment.<br><br>
-
-❤️
+Ich liebe dich.
 
 </div>
 
 <button onclick="showEndScreen()">OK ❤️</button>
-
 </div>
 
 <!-- END -->
-<div class="card hidden" id="endScreen">
+<div id="endScreen" class="card hidden">
+
 <div class="gift" onclick="openGift()">🎁</div>
 
 <div id="giftText" class="hidden">
 <div class="finalText">
-🎉 HAPPY BIRTHDAY MELISSA 🎉<br><br>
-🔢 Geschenkcode: 294
+🎉 HAPPY BIRTHDAY 🎉<br>
+Code: 294
 </div>
 </div>
 
@@ -325,44 +294,39 @@ Ich liebe dich in jedem Moment.<br><br>
 
 /* STATE */
 let solved={
-r1:false,r2:false,troll:false,m1:false,m2:false,bonus:false,
-r3:false,r4:false,m3:false,m4:false,r5:false
+r1:false,r2:false,troll:false,m1:false,m2:false,
+bonus:false,r3:false,r4:false,m3:false,m4:false,r5:false
 };
 
 /* BASIC */
-function beep(type){try{const ctx=new(AudioContext||webkitAudioContext)();const o=ctx.createOscillator();const g=ctx.createGain();o.connect(g);g.connect(ctx.destination);o.frequency.value=type==="good"?700:180;g.gain.value=0.05;o.start();o.stop(ctx.currentTime+0.15);}catch(e){}}
+function beep(){try{new(AudioContext||webkitAudioContext)().createOscillator().start();}catch(e){}}
 function vib(p=[150]){navigator.vibrate?.(p);}
-function updateBar(){let d=0;for(let k in solved){if(solved[k])d++;}document.getElementById("bar").style.width=(d/11)*100+"%";}
+function updateBar(){let d=0;for(let k in solved)if(solved[k])d++;bar.style.width=(d/11)*100+"%";}
 
 /* TIMER */
-let total=300;
-let timer;
+let total=300,timer;
 function startTimer(){
 timer=setInterval(()=>{
 total--;
 let m=Math.floor(total/60),s=total%60;
 if(s<10)s="0"+s;
-document.getElementById("timer").innerHTML=`⏱ ${m}:${s}`;
+timerEl.innerHTML="⏱ "+m+":"+s;
 if(total<=0){location.reload();}
 },1000);
 }
 
 /* START */
 function startGame(){
-let v=document.getElementById("startInput").value.toLowerCase().trim();
-if(v==="ich"){
-document.getElementById("intro").classList.add("hidden");
-document.getElementById("game").classList.remove("hidden");
+if(startInput.value.toLowerCase().trim()==="ich"){
+intro.classList.add("hidden");
+game.classList.remove("hidden");
 startTimer();
-}else{
-document.getElementById("startResult").innerHTML="<div class='bad'>❌ Tipp: Egoistischer</div>";
-}
+}else startResult.innerHTML="❌ Tipp falsch";
 }
 
-/* ===== RÄTSEL (DEINE LOGIK BLEIBT) ===== */
-
-function checkR1(){let v=r1.value.toLowerCase();if(v.includes("karte")){solved.r1=true;updateBar();r1r.innerHTML="✔ 4";}}
-function checkR2(){let v=r2.value.toLowerCase();if(v.includes("uhr")){solved.r2=true;trollArea.classList.remove("hidden");}}
+/* RÄTSEL */
+function checkR1(){if(r1.value.includes("karte")){solved.r1=true;updateBar();r1r.innerHTML="✔";}}
+function checkR2(){if(r2.value.includes("uhr")){solved.r2=true;trollArea.classList.remove("hidden");initTroll();}}
 function checkM1(){if(m1.value==="50"){solved.m1=true;updateBar();}}
 function checkM2(){if(m2.value==="56"){solved.m2=true;updateBar();}}
 function checkBonus(){if(bonus.value.includes("loch")){solved.bonus=true;updateBar();}}
@@ -372,6 +336,23 @@ function checkM3(){if(m3.value==="57"){solved.m3=true;updateBar();}}
 function checkM4(){if(m4.value==="26"){solved.m4=true;updateBar();}}
 function checkR5(){if(r5.value.includes("flasche")){solved.r5=true;updateBar();}}
 
+/* TROLL */
+let clicks=0,started=false;
+function initTroll(){
+if(started)return;started=true;
+trollBtn.onclick=()=>{
+clicks++;
+if(clicks<10){
+trollBtn.style.left=Math.random()*200-100+"px";
+trollBtn.style.top=Math.random()*60-30+"px";
+}else{
+solved.troll=true;
+updateBar();
+trollResult.innerHTML="✔ geschafft";
+}
+};
+}
+
 /* FINAL */
 function finishGame(){
 if(Object.values(solved).includes(false)){
@@ -379,11 +360,11 @@ finalResult.innerHTML="❌ erst alles lösen";
 return;
 }
 if(f1.value==="4"&&f2.value==="7"&&f3.value==="2"){
-setTimeout(()=>showPoem(),1200);
+setTimeout(showPoem,1000);
 }
 }
 
-/* POEM FLOW */
+/* FLOW */
 function showPoem(){
 game.classList.add("hidden");
 poemScreen.classList.remove("hidden");

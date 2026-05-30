@@ -125,6 +125,8 @@ button:active{transform:scale(0.98);}
 <input id="r2">
 <button onclick="checkR2()">Prüfen</button>
 
+<div id="r2r"></div>
+
 <div id="trollArea" class="hidden">
 <button id="trollBtn">😈 Fang mich</button>
 <div id="trollResult"></div>
@@ -267,6 +269,7 @@ document.getElementById("startResult").innerHTML="Tipp: Egoistischer";
 /* R1 */
 function checkR1(){
 let out=document.getElementById("r1r");
+
 if(val("r1").includes("karte")){
 out.innerHTML="✔ richtig → 4";
 out.className="good";
@@ -278,49 +281,74 @@ out.className="bad";
 
 /* R2 */
 function checkR2(){
+
 let out=document.getElementById("r2r");
+
 if(val("r2").includes("uhr")){
+
 out.innerHTML="✔ richtig → 7";
 out.className="good";
-document.getElementById("trollArea").classList.remove("hidden");
+
+document.getElementById("trollArea")
+.classList.remove("hidden");
+
 initTroll();
+
 }else{
+
 out.innerHTML="❌ nope";
 out.className="bad";
+
 }
 }
 
-/* TROLL FIX */
+/* TROLL */
 let c=0;
+let trollStarted=false;
 
 function initTroll(){
+
+if(trollStarted) return;
+
+trollStarted=true;
+
 const b=document.getElementById("trollBtn");
 
 b.onmouseenter=move;
 b.onclick=move;
 
 function move(){
+
 c++;
 
-b.innerHTML=`😈 Klick (${c}/16)`;
+b.innerHTML=`😈 Klick (${c}/12)`;
 
-b.style.transform=`translate(${Math.random()*220-110}px,${Math.random()*120-60}px)`;
+b.style.transform=
+`translate(${Math.random()*220-110}px,
+${Math.random()*120-60}px)`;
+
 b.style.transition="0.15s ease";
 
 if(c>=12){
-document.getElementById("trollResult").innerHTML="✔ geschafft → 2";
+
+document.getElementById("trollResult")
+.innerHTML="✔ geschafft → 2";
+
 b.disabled=true;
+
 b.onmouseenter=null;
 b.onclick=null;
+
 }
 }
 }
 
-/* MATHE + FEEDBACK */
+/* MATHE */
 
 function checkM1(){
 let out=document.getElementById("m1r");
-if(Number(val("m1"))===37){
+
+if(Number(val("m1"))===27){
 out.innerHTML="✔ richtig";
 out.className="good";
 }else{
@@ -331,6 +359,7 @@ out.className="bad";
 
 function checkM2(){
 let out=document.getElementById("m2r");
+
 if(Number(val("m2"))===6){
 out.innerHTML="✔ richtig";
 out.className="good";
@@ -342,6 +371,7 @@ out.className="bad";
 
 function checkM3(){
 let out=document.getElementById("m3r");
+
 if(Number(val("m3"))===47){
 out.innerHTML="✔ richtig";
 out.className="good";
@@ -353,6 +383,7 @@ out.className="bad";
 
 function checkM4(){
 let out=document.getElementById("m4r");
+
 if(Number(val("m4"))===34){
 out.innerHTML="✔ richtig";
 out.className="good";
@@ -363,93 +394,143 @@ out.className="bad";
 }
 
 /* BONUS */
+
 function checkBonus(){
+
 let out=document.getElementById("bonusr");
+
 if(val("bonus").includes("loch")){
+
 out.innerHTML="✔ richtig";
 out.className="good";
+
 }else{
+
 out.innerHTML="❌ nope";
 out.className="bad";
+
 }
 }
 
 /* R3 */
+
 function checkR3(){
+
 let out=document.getElementById("r3r");
 
 if(val("r3").includes("handtuch")){
+
 out.innerHTML="✔ richtig";
 out.className="good";
+
 }else{
+
 out.innerHTML="❌ nope";
 out.className="bad";
+
 }
 }
 
 /* R4 */
+
 function checkR4(){
+
 let out=document.getElementById("r4r");
 
 if(val("r4").includes("dunkel")){
+
 out.innerHTML="✔ richtig";
 out.className="good";
+
 }else{
+
 out.innerHTML="❌ nope";
 out.className="bad";
+
 }
 }
 
 /* R5 */
+
 function checkR5(){
+
 let out=document.getElementById("r5r");
 
 if(val("r5").includes("flasche")){
+
 out.innerHTML="✔ richtig";
 out.className="good";
+
 }else{
+
 out.innerHTML="❌ nope";
 out.className="bad";
+
 }
 }
 
 /* R6 */
+
 function checkR6(){
+
 let out=document.getElementById("r6r");
 
 if(
 val("r6").includes("alle") ||
 val("r6").includes("jeder")
 ){
+
 out.innerHTML="✔ richtig";
 out.className="good";
+
 }else{
+
 out.innerHTML="❌ nope";
 out.className="bad";
+
 }
 }
 
 /* R7 */
+
 function checkR7(){
+
 let out=document.getElementById("r7r");
 
 if(val("r7").includes("uhr")){
+
 out.innerHTML="✔ richtig";
 out.className="good";
+
 }else{
+
 out.innerHTML="❌ nope";
 out.className="bad";
+
 }
 }
 
 /* FINAL */
+
 function finishGame(){
 
-if(f1.value=="4"&&f2.value=="7"&&f3.value=="2"){
-document.getElementById("game").classList.add("hidden");
-document.getElementById("endScreen").classList.remove("hidden");
+if(
+f1.value=="4" &&
+f2.value=="7" &&
+f3.value=="2"
+){
+
+document.getElementById("game")
+.classList.add("hidden");
+
+document.getElementById("endScreen")
+.classList.remove("hidden");
+
 }else{
-document.getElementById("finalResult").innerHTML="❌ falscher Code";
+
+document.getElementById("finalResult")
+.innerHTML="❌ falscher Code";
+
 }
 }
 

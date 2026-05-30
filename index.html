@@ -1,385 +1,67 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🎉 Melissa´s Birthday Quest 🎉</title>
-
-<style>
-
-*{box-sizing:border-box;}
-
-body{
-margin:0;
-font-family:Arial, Helvetica, sans-serif;
-background:linear-gradient(-45deg,#ff9a9e,#fad0c4,#ffd6a5,#fff1c1);
-background-size:400% 400%;
-animation:bg 12s ease infinite;
-overflow-x:hidden;
-color:#222;
-text-align:center;
-}
-
-@keyframes bg{
-0%{background-position:0% 50%;}
-50%{background-position:100% 50%;}
-100%{background-position:0% 50%;}
-}
-
-.container{max-width:520px;margin:auto;padding:12px;}
-
-.card{
-background:white;
-padding:18px;
-margin:14px 0;
-border-radius:22px;
-box-shadow:0 8px 24px rgba(0,0,0,0.15);
-animation:fade 0.5s ease;
-}
-
-@keyframes fade{
-from{opacity:0;transform:translateY(20px);}
-to{opacity:1;transform:translateY(0);}
-}
-
-h1{font-size:2em;}
-h2{margin-top:0;}
-
-input{
-width:100%;
-padding:16px;
-margin-top:10px;
-border-radius:14px;
-border:2px solid #ddd;
-font-size:18px;
-text-align:center;
-}
-
-button{
-width:100%;
-padding:16px;
-margin-top:10px;
-border:none;
-border-radius:14px;
-background:#ff4d6d;
-color:white;
-font-size:18px;
-font-weight:bold;
-cursor:pointer;
-}
-
-button:active{transform:scale(0.98);}
-
-.good{color:green;font-weight:bold;}
-.bad{color:red;font-weight:bold;}
-
-.hidden{display:none;}
-
-.progress{
-height:18px;
-background:#eee;
-border-radius:20px;
-overflow:hidden;
-margin-top:10px;
-}
-
-.bar{height:100%;width:0%;background:#ff4d6d;transition:0.4s;}
-
-.lock{font-size:70px;animation:shake 1s infinite;}
-
-@keyframes shake{
-0%{transform:rotate(0deg);}
-25%{transform:rotate(4deg);}
-50%{transform:rotate(-4deg);}
-75%{transform:rotate(4deg);}
-100%{transform:rotate(0deg);}
-}
-
-.confetti{
-position:fixed;
-width:10px;height:10px;
-top:-10px;
-z-index:9999;
-animation:fall linear forwards;
-}
-
-@keyframes fall{
-to{transform:translateY(120vh) rotate(720deg);opacity:0;}
-}
-
-.gift{font-size:90px;cursor:pointer;animation:bounce 1s infinite;}
-
-@keyframes bounce{
-0%,100%{transform:translateY(0);}
-50%{transform:translateY(-12px);}
-}
-
-.finalText{
-font-size:22px;
-font-weight:bold;
-color:#ff0066;
-line-height:1.6em;
-}
-
-</style>
-</head>
-
-<body>
-
-<div class="container">
-
-<!-- INTRO -->
-<div class="card" id="intro">
-<h1>🎉 Melissa´s Birthday Quest 🎉</h1>
-<p>Finde alle Lösungen bevor die Zeit abläuft 🎁</p>
-
-<h2>Wer ist die beste Datenschutzdodo?</h2>
-
-<input id="startInput">
-<button onclick="startGame()">Start</button>
-<div id="startResult"></div>
-</div>
-
-<!-- GAME -->
-<div id="game" class="hidden">
-
-<div class="card">
-<div id="timer">⏱ 05:00</div>
-<div class="progress"><div class="bar" id="bar"></div></div>
-</div>
-
-<!-- R1 -->
-<div class="card">
-<h2>Rätsel 1</h2>
-<p>Ich habe Städte ohne Häuser...</p>
-<input id="r1">
-<button onclick="checkR1()">Check</button>
-<div id="r1r"></div>
-</div>
-
-<!-- R2 -->
-<div class="card">
-<h2>Rätsel 2</h2>
-<input id="r2">
-<button onclick="checkR2()">Check</button>
-<div id="r2r"></div>
-
-<div id="trollArea" class="hidden">
-<button id="trollBtn">😈 Klick mich</button>
-<div id="trollResult"></div>
-</div>
-</div>
-
-<!-- M1 -->
-<div class="card">
-<h2>Mathe 1</h2>
-<input id="m1">
-<button onclick="checkM1()">Check</button>
-<div id="m1r"></div>
-</div>
-
-<!-- M2 -->
-<div class="card">
-<h2>Mathe 2</h2>
-<input id="m2">
-<button onclick="checkM2()">Check</button>
-<div id="m2r"></div>
-</div>
-
-<!-- BONUS -->
-<div class="card">
-<h2>Bonus</h2>
-<input id="bonus">
-<button onclick="checkBonus()">Check</button>
-<div id="bonusr"></div>
-</div>
-
-<!-- R3 -->
-<div class="card">
-<h2>Rätsel 3</h2>
-<input id="r3">
-<button onclick="checkR3()">Check</button>
-<div id="r3r"></div>
-</div>
-
-<!-- R4 -->
-<div class="card">
-<h2>Rätsel 4</h2>
-<input id="r4">
-<button onclick="checkR4()">Check</button>
-<div id="r4r"></div>
-</div>
-
-<!-- M3 -->
-<div class="card">
-<h2>Mathe 3</h2>
-<input id="m3">
-<button onclick="checkM3()">Check</button>
-<div id="m3r"></div>
-</div>
-
-<!-- M4 -->
-<div class="card">
-<h2>Mathe 4</h2>
-<input id="m4">
-<button onclick="checkM4()">Check</button>
-<div id="m4r"></div>
-</div>
-
-<!-- R5 -->
-<div class="card">
-<h2>Rätsel 5</h2>
-<input id="r5">
-<button onclick="checkR5()">Check</button>
-<div id="r5r"></div>
-</div>
-
-<!-- FINAL -->
-<div class="card">
-<h2>Final</h2>
-
-<div class="lock" id="lock">🔒</div>
-
-<input id="f1" maxlength="1">
-<input id="f2" maxlength="1">
-<input id="f3" maxlength="1">
-
-<button onclick="finishGame()">Öffnen</button>
-<div id="finalResult"></div>
-</div>
-
-</div>
-
-<!-- GAME OVER -->
-<div id="gameOver" class="card hidden">
-<h1>GAME OVER</h1>
-<button onclick="location.reload()">Neu</button>
-</div>
-
-<!-- POEM -->
-<div id="poemScreen" class="card hidden">
-
-<div class="finalText">
-
-Du bist der leise Morgen in meinem Herz,<br>
-der erste Sonnenstrahl nach langer Nacht.<br><br>
-
-In deiner Nähe verliert die Zeit ihr Gewicht,<br>
-und alles wird leicht.<br><br>
-
-Ich liebe dich.
-
-</div>
-
-<button onclick="showEndScreen()">OK ❤️</button>
-</div>
-
-<!-- END -->
-<div id="endScreen" class="card hidden">
-
-<div class="gift" onclick="openGift()">🎁</div>
-
-<div id="giftText" class="hidden">
-<div class="finalText">
-🎉 HAPPY BIRTHDAY 🎉<br>
-Code: 294
-</div>
-</div>
-
-</div>
-
-</div>
-
-<script>
-
-/* STATE */
-let solved={
-r1:false,r2:false,troll:false,m1:false,m2:false,
-bonus:false,r3:false,r4:false,m3:false,m4:false,r5:false
-};
-
-/* BASIC */
-function beep(){try{new(AudioContext||webkitAudioContext)().createOscillator().start();}catch(e){}}
-function vib(p=[150]){navigator.vibrate?.(p);}
-function updateBar(){let d=0;for(let k in solved)if(solved[k])d++;bar.style.width=(d/11)*100+"%";}
-
-/* TIMER */
-let total=300,timer;
-function startTimer(){
-timer=setInterval(()=>{
-total--;
-let m=Math.floor(total/60),s=total%60;
-if(s<10)s="0"+s;
-timerEl.innerHTML="⏱ "+m+":"+s;
-if(total<=0){location.reload();}
-},1000);
-}
-
-/* START */
-function startGame(){
-if(startInput.value.toLowerCase().trim()==="ich"){
-intro.classList.add("hidden");
-game.classList.remove("hidden");
-startTimer();
-}else startResult.innerHTML="❌ Tipp falsch";
-}
-
-/* RÄTSEL */
-function checkR1(){if(r1.value.includes("karte")){solved.r1=true;updateBar();r1r.innerHTML="✔";}}
-function checkR2(){if(r2.value.includes("uhr")){solved.r2=true;trollArea.classList.remove("hidden");initTroll();}}
-function checkM1(){if(m1.value==="50"){solved.m1=true;updateBar();}}
-function checkM2(){if(m2.value==="56"){solved.m2=true;updateBar();}}
-function checkBonus(){if(bonus.value.includes("loch")){solved.bonus=true;updateBar();}}
-function checkR3(){if(r3.value.includes("handtuch")){solved.r3=true;updateBar();}}
-function checkR4(){if(r4.value.includes("dunkel")){solved.r4=true;updateBar();}}
-function checkM3(){if(m3.value==="57"){solved.m3=true;updateBar();}}
-function checkM4(){if(m4.value==="26"){solved.m4=true;updateBar();}}
-function checkR5(){if(r5.value.includes("flasche")){solved.r5=true;updateBar();}}
-
-/* TROLL */
-let clicks=0,started=false;
-function initTroll(){
-if(started)return;started=true;
-trollBtn.onclick=()=>{
-clicks++;
-if(clicks<10){
-trollBtn.style.left=Math.random()*200-100+"px";
-trollBtn.style.top=Math.random()*60-30+"px";
+/* R3 */
+function checkR3(){
+let out=document.getElementById("r3r");
+
+if(val("r3").includes("handtuch")){
+out.innerHTML="✔ richtig";
+out.className="good";
 }else{
-solved.troll=true;
-updateBar();
-trollResult.innerHTML="✔ geschafft";
-}
-};
-}
-
-/* FINAL */
-function finishGame(){
-if(Object.values(solved).includes(false)){
-finalResult.innerHTML="❌ erst alles lösen";
-return;
-}
-if(f1.value==="4"&&f2.value==="7"&&f3.value==="2"){
-setTimeout(showPoem,1000);
+out.innerHTML="❌ nope";
+out.className="bad";
 }
 }
 
-/* FLOW */
-function showPoem(){
-game.classList.add("hidden");
-poemScreen.classList.remove("hidden");
+/* R4 */
+function checkR4(){
+let out=document.getElementById("r4r");
+
+if(val("r4").includes("dunkel")){
+out.innerHTML="✔ richtig";
+out.className="good";
+}else{
+out.innerHTML="❌ nope";
+out.className="bad";
+}
 }
 
-function showEndScreen(){
-poemScreen.classList.add("hidden");
-endScreen.classList.remove("hidden");
+/* R5 */
+function checkR5(){
+let out=document.getElementById("r5r");
+
+if(val("r5").includes("flasche")){
+out.innerHTML="✔ richtig";
+out.className="good";
+}else{
+out.innerHTML="❌ nope";
+out.className="bad";
+}
 }
 
-function openGift(){
-giftText.classList.remove("hidden");
+/* R6 */
+function checkR6(){
+let out=document.getElementById("r6r");
+
+if(
+val("r6").includes("alle") ||
+val("r6").includes("jeder")
+){
+out.innerHTML="✔ richtig";
+out.className="good";
+}else{
+out.innerHTML="❌ nope";
+out.className="bad";
+}
 }
 
-</script>
+/* R7 */
+function checkR7(){
+let out=document.getElementById("r7r");
 
-</body>
-</html>
+if(val("r7").includes("uhr")){
+out.innerHTML="✔ richtig";
+out.className="good";
+}else{
+out.innerHTML="❌ nope";
+out.className="bad";
+}
+}

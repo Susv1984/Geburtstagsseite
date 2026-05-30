@@ -270,7 +270,7 @@ opacity:0;
 <div id="r6r"></div>
 </div>
 
-<!-- R7 ERSETZT -->
+<!-- R7 -->
 <div class="card">
 <h2>Rätsel 7</h2>
 <p>Was kann man brechen, ohne es zu berühren?</p>
@@ -302,9 +302,7 @@ opacity:0;
 <!-- END -->
 <div class="card hidden" id="endScreen">
 
-<div class="gift" onclick="openGift()">
-🎁
-</div>
+<div class="gift" onclick="openGift()">🎁</div>
 
 <div id="giftText" class="hidden">
 
@@ -391,7 +389,7 @@ out.className="bad";
 }
 }
 
-/* TROLL */
+/* TROLL FIX (ONLY CHANGE HERE) */
 
 let c=0;
 let trollStarted=false;
@@ -424,6 +422,9 @@ document.getElementById("trollResult")
 
 document.getElementById("trollResult")
 .className="good";
+
+/* FIX: Button verschwindet damit er nichts überdeckt */
+b.style.display="none";
 
 b.disabled=true;
 

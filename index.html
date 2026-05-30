@@ -1,3 +1,379 @@
+```html
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎉 Melissa´s Birthday Quest 🎉</title>
+
+<style>
+
+*{box-sizing:border-box;}
+
+body{
+margin:0;
+font-family:Arial, Helvetica, sans-serif;
+background:linear-gradient(-45deg,#ff9a9e,#fad0c4,#ffd6a5,#fff1c1);
+background-size:400% 400%;
+animation:bg 12s ease infinite;
+overflow-x:hidden;
+color:#222;
+text-align:center;
+}
+
+@keyframes bg{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+.container{
+width:100%;
+max-width:520px;
+margin:auto;
+padding:12px;
+}
+
+.card{
+background:white;
+padding:18px;
+margin:14px 0;
+border-radius:22px;
+box-shadow:0 8px 24px rgba(0,0,0,0.15);
+animation:fade 0.5s ease;
+}
+
+@keyframes fade{
+from{opacity:0;transform:translateY(20px);}
+to{opacity:1;transform:translateY(0);}
+}
+
+h1{font-size:2em;margin-bottom:10px;}
+
+input{
+width:100%;
+padding:16px;
+margin-top:10px;
+border-radius:14px;
+border:2px solid #ddd;
+font-size:18px;
+text-align:center;
+}
+
+button{
+width:100%;
+padding:16px;
+margin-top:10px;
+border:none;
+border-radius:14px;
+background:#ff4d6d;
+color:white;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+transition:0.15s;
+}
+
+button:active{transform:scale(0.98);}
+
+.hidden{display:none;}
+
+.good{color:green;font-weight:bold;}
+.bad{color:red;font-weight:bold;}
+
+.lock{font-size:60px;}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- INTRO -->
+<div class="card" id="intro">
+
+<h1>🎉 Melissa´s Birthday Quest 🎉</h1>
+
+<p>Wer ist der beste Datenschutzdodo und Qualmity Managerin der Welt?</p>
+
+<input id="startInput">
+<button onclick="startGame()">Start</button>
+
+<div id="startResult"></div>
+
+</div>
+
+<!-- GAME -->
+<div id="game" class="hidden">
+
+<!-- R1 -->
+<div class="card">
+<h2>Rätsel 1</h2>
+<p>Ich habe Städte, aber keine Häuser...</p>
+
+<input id="r1">
+<button onclick="checkR1()">Prüfen</button>
+<div id="r1r"></div>
+</div>
+
+<!-- R2 -->
+<div class="card">
+<h2>Rätsel 2 (Troll)</h2>
+<p>Ich gehe den ganzen Tag, bleibe aber stehen.</p>
+
+<input id="r2">
+<button onclick="checkR2()">Prüfen</button>
+
+<div id="trollArea" class="hidden">
+<button id="trollBtn">😈 Fang mich</button>
+<div id="trollResult"></div>
+</div>
+</div>
+
+<!-- MATH -->
+<div class="card">
+<h2>Mathe 1</h2>
+<p>(81 ÷ 9) + (6 × 4) − (3 × 2)</p>
+<input id="m1">
+<button onclick="checkM1()">Prüfen</button>
+<div id="m1r"></div>
+</div>
+
+<div class="card">
+<h2>Mathe 2</h2>
+<p>√841 − (5 × 6) + (14 ÷ 2)</p>
+<input id="m2">
+<button onclick="checkM2()">Prüfen</button>
+<div id="m2r"></div>
+</div>
+
+<div class="card">
+<h2>Mathe 3</h2>
+<p>(7 × 7) − (18 ÷ 2) + (10 − 3)</p>
+<input id="m3">
+<button onclick="checkM3()">Prüfen</button>
+<div id="m3r"></div>
+</div>
+
+<div class="card">
+<h2>Mathe 4</h2>
+<p>(100 ÷ 4) + (3 × 5) − (2 × 3)</p>
+<input id="m4">
+<button onclick="checkM4()">Prüfen</button>
+<div id="m4r"></div>
+</div>
+
+<!-- BONUS -->
+<div class="card">
+<h2>Bonus</h2>
+<p>Ich werde größer, je mehr du mir wegnimmst.</p>
+
+<input id="bonus">
+<button onclick="checkBonus()">Prüfen</button>
+<div id="bonusr"></div>
+</div>
+
+<!-- R3 -->
+<div class="card">
+<h2>Rätsel 3</h2>
+<p>Was wird nass, während es trocknet?</p>
+
+<input id="r3">
+<button onclick="checkR3()">Prüfen</button>
+<div id="r3r"></div>
+</div>
+
+<!-- R4 -->
+<div class="card">
+<h2>Rätsel 4</h2>
+<p>Je mehr du davon hast, desto weniger siehst du.</p>
+
+<input id="r4">
+<button onclick="checkR4()">Prüfen</button>
+<div id="r4r"></div>
+</div>
+
+<!-- R5 -->
+<div class="card">
+<h2>Rätsel 5</h2>
+<p>Ich habe einen Hals, aber keinen Kopf.</p>
+
+<input id="r5">
+<button onclick="checkR5()">Prüfen</button>
+<div id="r5r"></div>
+</div>
+
+<!-- R6 -->
+<div class="card">
+<h2>Rätsel 6</h2>
+<p>Welcher Monat hat 28 Tage?</p>
+
+<input id="r6">
+<button onclick="checkR6()">Prüfen</button>
+<div id="r6r"></div>
+</div>
+
+<!-- R7 -->
+<div class="card">
+<h2>Rätsel 7</h2>
+<p>Was hat Hände, kann aber nicht klatschen?</p>
+
+<input id="r7">
+<button onclick="checkR7()">Prüfen</button>
+<div id="r7r"></div>
+</div>
+
+<!-- FINAL -->
+<div class="card">
+<h2>Final</h2>
+
+<div class="lock">🔒</div>
+
+<input id="f1" maxlength="1">
+<input id="f2" maxlength="1">
+<input id="f3" maxlength="1">
+
+<button onclick="finishGame()">Öffnen</button>
+<div id="finalResult"></div>
+
+</div>
+
+</div>
+
+<!-- END -->
+<div class="card hidden" id="endScreen">
+<h1>🎉 HAPPY BIRTHDAY MELISSA 🎉</h1>
+</div>
+
+</div>
+
+<script>
+
+function val(id){
+return document.getElementById(id).value.toLowerCase().trim();
+}
+
+/* START */
+function startGame(){
+if(val("startInput")==="ich"){
+document.getElementById("intro").classList.add("hidden");
+document.getElementById("game").classList.remove("hidden");
+}else{
+document.getElementById("startResult").innerHTML="Tipp: Egoistischer";
+}
+}
+
+/* R1 */
+function checkR1(){
+let out=document.getElementById("r1r");
+if(val("r1").includes("karte")){
+out.innerHTML="✔ richtig → 4";
+out.className="good";
+}else{
+out.innerHTML="❌ nope";
+out.className="bad";
+}
+}
+
+/* R2 */
+function checkR2(){
+let out=document.getElementById("r2r");
+if(val("r2").includes("uhr")){
+out.innerHTML="✔ richtig → 7";
+out.className="good";
+document.getElementById("trollArea").classList.remove("hidden");
+initTroll();
+}else{
+out.innerHTML="❌ nope";
+out.className="bad";
+}
+}
+
+/* TROLL FIX */
+let c=0;
+
+function initTroll(){
+const b=document.getElementById("trollBtn");
+
+b.onmouseenter=move;
+b.onclick=move;
+
+function move(){
+c++;
+
+b.innerHTML=`😈 Klick (${c}/16)`;
+
+b.style.transform=`translate(${Math.random()*220-110}px,${Math.random()*120-60}px)`;
+b.style.transition="0.15s ease";
+
+if(c>=12){
+document.getElementById("trollResult").innerHTML="✔ geschafft → 2";
+b.disabled=true;
+b.onmouseenter=null;
+b.onclick=null;
+}
+}
+}
+
+/* MATHE + FEEDBACK */
+
+function checkM1(){
+let out=document.getElementById("m1r");
+if(Number(val("m1"))===37){
+out.innerHTML="✔ richtig";
+out.className="good";
+}else{
+out.innerHTML="❌ nope";
+out.className="bad";
+}
+}
+
+function checkM2(){
+let out=document.getElementById("m2r");
+if(Number(val("m2"))===6){
+out.innerHTML="✔ richtig";
+out.className="good";
+}else{
+out.innerHTML="❌ nope";
+out.className="bad";
+}
+}
+
+function checkM3(){
+let out=document.getElementById("m3r");
+if(Number(val("m3"))===47){
+out.innerHTML="✔ richtig";
+out.className="good";
+}else{
+out.innerHTML="❌ nope";
+out.className="bad";
+}
+}
+
+function checkM4(){
+let out=document.getElementById("m4r");
+if(Number(val("m4"))===34){
+out.innerHTML="✔ richtig";
+out.className="good";
+}else{
+out.innerHTML="❌ nope";
+out.className="bad";
+}
+}
+
+/* BONUS */
+function checkBonus(){
+let out=document.getElementById("bonusr");
+if(val("bonus").includes("loch")){
+out.innerHTML="✔ richtig";
+out.className="good";
+}else{
+out.innerHTML="❌ nope";
+out.className="bad";
+}
+}
+
 /* R3 */
 function checkR3(){
 let out=document.getElementById("r3r");
@@ -65,3 +441,20 @@ out.innerHTML="❌ nope";
 out.className="bad";
 }
 }
+
+/* FINAL */
+function finishGame(){
+
+if(f1.value=="4"&&f2.value=="7"&&f3.value=="2"){
+document.getElementById("game").classList.add("hidden");
+document.getElementById("endScreen").classList.remove("hidden");
+}else{
+document.getElementById("finalResult").innerHTML="❌ falscher Code";
+}
+}
+
+</script>
+
+</body>
+</html>
+```

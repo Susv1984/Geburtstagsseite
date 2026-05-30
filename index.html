@@ -432,7 +432,7 @@ function move(){
 
 c++;
 
-b.innerHTML=`😈 Klick (${c}/12)`;
+b.innerHTML=`😈 Klick`;
 
 b.style.transform=
 `translate(${Math.random()*220-110}px,
@@ -441,7 +441,7 @@ ${Math.random()*120-60}px)`;
 if(c>=12){
 
 document.getElementById("trollResult")
-.innerHTML="✔ geschafft → 2";
+.innerHTML="✔ geschafft";
 
 document.getElementById("trollResult")
 .className="good";
@@ -517,7 +517,7 @@ let out=document.getElementById("m4r");
 
 if(Number(val("m4"))===34){
 
-out.innerHTML="✔ richtig";
+out.innerHTML="✔ richtig -> 2";
 out.className="good";
 
 }else{
